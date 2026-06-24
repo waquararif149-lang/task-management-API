@@ -27,7 +27,10 @@ export default class ProductController {
     async getProducts(req, res) {
         try {
             const limit = Number(req.query.limit) || 20;
-            const cursor = req.query.cursor;
+            const cursor = {
+                _id: req.query.cursorId,
+                created_at: req.query.cursorDate
+            };
             const category = req.query.category;
 
             const products =
@@ -37,10 +40,12 @@ export default class ProductController {
                     category
                 );
 
-            const nextCursor =
-                products.length > 0
-                    ? products[products.length - 1]._id
-                    : null;
+            const lastproduct=products[products.length - 1];
+
+            const nextCursor ={
+                _id:lastproduct._id,
+                created_at:lastproduct.created_at
+            }
 
             return res.status(200).json({
                 success: true,
