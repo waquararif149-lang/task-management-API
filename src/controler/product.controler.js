@@ -23,4 +23,24 @@ export default class ProductController {
             });
         }
     }
+
+    async getProducts(req, res) {
+        try {
+            const limit = Number(req.query.limit) || 20;
+
+            const products =
+                await this.productRepository.getProducts(limit);
+
+            return res.status(200).json({
+                success: true,
+                count: products.length,
+                data: products,
+            });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    }
 }

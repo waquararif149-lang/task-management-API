@@ -10,5 +10,9 @@ ProductRouter.post(
   "/",
   productController.createProduct.bind(productController)
 );
+ProductRouter.get(
+  "/",
+  productController.getProducts.bind(productController)
+);
 
 export default ProductRouter;
