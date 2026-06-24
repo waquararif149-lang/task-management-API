@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import ProductRouter from "./routes/product.route.js";
 
 const app = express();
 
@@ -15,5 +16,7 @@ app.get("/", (req, res) => {
     message: "Server is running successfully",
   });
 });
+
+app.use("/api/products",ProductRouter);
 
 export default app;
