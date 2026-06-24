@@ -6,8 +6,12 @@ class ProductRepository {
         return product;
     }
 
-    async getProducts(limit, cursor) {
+    async getProducts(limit, cursor, category) {
         const query = {};
+
+        if (category) {
+            query.category = category;
+        }
 
         if (cursor) {
             query._id = { $lt: cursor };

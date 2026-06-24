@@ -28,11 +28,13 @@ export default class ProductController {
         try {
             const limit = Number(req.query.limit) || 20;
             const cursor = req.query.cursor;
+            const category = req.query.category;
 
             const products =
                 await this.productRepository.getProducts(
                     limit,
-                    cursor
+                    cursor,
+                    category
                 );
 
             const nextCursor =
