@@ -33,6 +33,12 @@ productSchema.index({
   _id: -1,
 });
 
+productSchema.index({
+   category: 1,
+   created_at: -1,
+   _id: -1
+});
+
 const Product = mongoose.model("Product", productSchema);
 
 export default Product;
