@@ -6,9 +6,15 @@ class ProductRepository {
         return product;
     }
 
-    async getProducts(limit = 20) {
-        return await Product.find()
-            .sort({ created_at: -1, _id: -1 })
+    async getProducts(limit, cursor) {
+        const query = {};
+
+        if (cursor) {
+            query._id = { $lt: cursor };
+        }
+
+        return await Product.find(query)
+            .sort({ _id: -1 })
             .limit(limit);
     }
 }

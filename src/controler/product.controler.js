@@ -27,13 +27,23 @@ export default class ProductController {
     async getProducts(req, res) {
         try {
             const limit = Number(req.query.limit) || 20;
+            const cursor = req.query.cursor;
 
             const products =
-                await this.productRepository.getProducts(limit);
+                await this.productRepository.getProducts(
+                    limit,
+                    cursor
+                );
+
+            const nextCursor =
+                products.length > 0
+                    ? products[products.length - 1]._id
+                    : null;
 
             return res.status(200).json({
                 success: true,
                 count: products.length,
+                nextCursor,
                 data: products,
             });
         } catch (error) {
