@@ -15,4 +15,9 @@ ProductRouter.get(
   productController.getProducts.bind(productController)
 );
 
+ProductRouter.delete(
+  "/delete",
+  productController.deleteMany.bind(productController)
+);
+
 export default ProductRouter;

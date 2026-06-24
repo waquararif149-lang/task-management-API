@@ -18,8 +18,12 @@ class ProductRepository {
         }
 
         return await Product.find(query)
-            .sort({ _id: -1 })
+            .sort({ created_at: -1, _id: -1 })
             .limit(limit);
+    }
+
+    async deleteMany(){
+        return await Product.deleteMany({});
     }
 }
 

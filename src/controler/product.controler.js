@@ -55,4 +55,19 @@ export default class ProductController {
             });
         }
     }
+
+    async deleteMany(req, res) {
+        try {
+            await this.productRepository.deleteMany();
+            res.status(200).json({
+                success: true,
+                message: "prod deleted successfully"
+            })
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    }
 }
